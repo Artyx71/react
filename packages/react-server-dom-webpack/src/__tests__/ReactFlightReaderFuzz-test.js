@@ -1264,8 +1264,7 @@ describe.each(['node', 'edge'])('ReactFlightReaderFuzz (%s)', host => {
         yieldBetweenPackets: true,
       }));
 
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip.each(['bytes'])('%s shared between two collections', type =>
+    it.each(['bytes'])('%s shared between two collections', type =>
       runGraph({
         nodes: {
           inner: {[type]: type === 'bytes' ? 2 : []},
@@ -1276,8 +1275,7 @@ describe.each(['node', 'edge'])('ReactFlightReaderFuzz (%s)', host => {
       }),
     );
 
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip.each(['bytes'])('%s in repeated stream items', type =>
+    it.each(['bytes'])('%s in repeated stream items', type =>
       runGraph({
         nodes: {
           inner: {[type]: type === 'bytes' ? 2 : []},
@@ -1288,8 +1286,7 @@ describe.each(['node', 'edge'])('ReactFlightReaderFuzz (%s)', host => {
       }),
     );
 
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip.each(['bytes'])('%s shared between different stream items', type =>
+    it.each(['bytes'])('%s shared between different stream items', type =>
       runGraph({
         nodes: {
           inner:
@@ -1427,8 +1424,7 @@ describe.each(['node', 'edge'])('ReactFlightReaderFuzz (%s)', host => {
         roots: {entry: 'exposure', other: 'exposure'},
       }));
 
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip('FormData bound to a function in a larger graph', () =>
+    it('FormData bound to a function in a larger graph', () =>
       runGraph({
         nodes: {
           form: {special: 'form data'},
