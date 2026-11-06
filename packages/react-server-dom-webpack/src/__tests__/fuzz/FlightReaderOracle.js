@@ -90,8 +90,9 @@ function createOracle(
         state.functionCalls.forEach((call, received) =>
           observeServerFunction(state, received, call.metadata, call.args),
         );
+        const visited = new Set();
         const blobs = state.receivedValues.flatMap(root =>
-          traverse(state, root, false),
+          traverse(state, root, false, visited),
         );
         await Promise.all(
           blobs.map(({expectedValue, received}) =>
@@ -112,12 +113,11 @@ function observeValue(state, expectedValue, received, path) {
   state.receivedValues.push(root);
 }
 
-function traverse(state, root, observe) {
+function traverse(state, root, observe, visited = new Set()) {
   const blobs = [];
   const todo = [root];
   // One source object may have several received copies. Visit each copy,
   // including on a later check, rather than stopping at the source object.
-  const visited = new Set();
   while (todo.length > 0) {
     const pair = todo.pop();
     try {
