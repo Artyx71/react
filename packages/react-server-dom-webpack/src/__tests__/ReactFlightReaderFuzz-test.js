@@ -1919,8 +1919,7 @@ describe.each(['node', 'edge', 'reply'])('ReactFlightReaderFuzz (%s)', host => {
     });
   }
   describe('source timing and response context', () => {
-    // eslint-disable-next-line jest/no-disabled-tests
-    it.skip.each([':', '%3A:', ':%25:'])(
+    it.each([':', '%3A:', ':%25:'])(
       'a cycle through the property name %j',
       key =>
         runGraph({
@@ -2056,10 +2055,7 @@ describe.each(['node', 'edge', 'reply'])('ReactFlightReaderFuzz (%s)', host => {
           it(formatCaseName('graph', seed, readTiming, scheduleIndex), () =>
             runGraph({
               ...generateGraph(seed, {
-                without: (host === 'reply'
-                  ? unsupportedReplyOperations
-                  : []
-                ).concat(['colon']),
+                without: host === 'reply' ? unsupportedReplyOperations : [],
               }),
               seed,
               readTiming,
